@@ -27,8 +27,8 @@ function nextEvent(socket, event) {
   return new Promise((resolve) => socket.once(event, resolve));
 }
 
-const organizer = await login("organizer@quizora.local");
-const participant = await login("player@quizora.local");
+const organizer = await login("organizer@quizroom.local");
+const participant = await login("player@quizroom.local");
 const quizResponse = await fetch(`${baseUrl}/api/quizzes`, { headers: { Authorization: `Bearer ${organizer.token}` } });
 const { quizzes } = await quizResponse.json();
 const quiz = quizzes.find((item) => item.title === "Разминка: мир технологий");

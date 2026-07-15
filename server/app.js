@@ -95,7 +95,7 @@ export function createApp() {
     if (session.status === "FINISHED") return res.status(409).json({ error: "Квиз уже завершён" });
     const guestId = crypto.randomUUID();
     const result = db.prepare("INSERT INTO users (name, email, password_hash, role) VALUES (?, ?, ?, 'PARTICIPANT')")
-      .run(name, `${guestId}@guest.quizora.local`, `guest-${guestId}`);
+      .run(name, `${guestId}@guest.quizroom.local`, `guest-${guestId}`);
     const user = db.prepare("SELECT * FROM users WHERE id = ?").get(result.lastInsertRowid);
     res.status(201).json({ token: createToken(user), user: publicUser(user), roomCode });
   });

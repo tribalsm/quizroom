@@ -105,7 +105,7 @@ export function publicUser(user) {
     name: user.name,
     email: user.email,
     role: user.role,
-    isGuest: user.email.endsWith("@guest.quizora.local")
+    isGuest: user.email.endsWith("@guest.quizroom.local")
   };
 }
 

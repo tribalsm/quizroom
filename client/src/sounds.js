@@ -1,4 +1,4 @@
-const SOUND_KEY = "quizora_sound_enabled";
+const SOUND_KEY = "quizroom_sound_enabled";
 let audioContext = null;
 
 export function isSoundEnabled() {

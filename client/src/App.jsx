@@ -4,7 +4,7 @@ import { api, getToken, saveToken, uploadImage } from "./api.js";
 import { createQuizSocket } from "./socket.js";
 import { isSoundEnabled, playSound, setSoundEnabled } from "./sounds.js";
 
-const LIVE_ROOM_KEY = "quizora_live_room";
+const LIVE_ROOM_KEY = "quizroom_live_room";
 
 const emptyQuiz = {
   title: "",
@@ -101,7 +101,7 @@ function AuthScreen({ onAuthenticated }) {
   return (
     <main className="auth-layout">
       <section className="auth-hero">
-        <div className="brand"><span>Q</span> Quizora</div>
+        <div className="brand"><span>Q</span> QuizRoom</div>
         <div className="hero-copy">
           <div className="eyebrow">Квизы в реальном времени</div>
           <h1>Соберите друзей.<br />Задайте вопрос.<br /><em>Узнайте победителя.</em></h1>
@@ -113,7 +113,7 @@ function AuthScreen({ onAuthenticated }) {
       </section>
       <section className="auth-panel">
         <form className="auth-card" onSubmit={submit}>
-          <div className="mobile-brand brand"><span>Q</span> Quizora</div>
+          <div className="mobile-brand brand"><span>Q</span> QuizRoom</div>
           <p className="eyebrow">Добро пожаловать</p>
           <h2>{mode === "guest" ? "Войдите гостем" : mode === "login" ? "Войдите в аккаунт" : "Создайте аккаунт"}</h2>
           <p className="muted">{mode === "guest" ? "Нужны только имя и код комнаты" : mode === "login" ? "Продолжите игру или создайте новый квиз" : "Это займёт меньше минуты"}</p>
@@ -144,7 +144,7 @@ function AuthScreen({ onAuthenticated }) {
             </button>
             {mode !== "guest" && <button type="button" className="text-button guest-switch" onClick={() => { setMode("guest"); setError(""); }}>Играть без регистрации</button>}
           </div>
-          <div className="demo-hint">Демо: organizer@quizora.local или player@quizora.local · пароль quiz123</div>
+          <div className="demo-hint">Демо: organizer@quizroom.local или player@quizroom.local · пароль quiz123</div>
         </form>
       </section>
     </main>
@@ -156,7 +156,7 @@ function AppShell({ user, onLogout, children, page, setPage }) {
   return (
     <div className="app-shell">
       <header className="topbar">
-        <div className="brand"><span>Q</span> Quizora</div>
+        <div className="brand"><span>Q</span> QuizRoom</div>
         <nav>
           <button className={page === "main" ? "active" : ""} onClick={() => setPage("main")}>{organizer ? "Мои квизы" : "Играть"}</button>
           <button className={page === "history" ? "active" : ""} onClick={() => setPage("history")}>История</button>
@@ -436,7 +436,7 @@ function HostRoom({ socket, room, onExit }) {
 
   return (
     <main className="live-stage host-stage">
-      <div className="live-top"><div className="brand light"><span>Q</span> Quizora live</div><div className="room-code-small">Код <strong>{state.code}</strong></div><SoundToggle /><Button variant="danger" onClick={() => emit("host:finish")}>Завершить</Button></div>
+      <div className="live-top"><div className="brand light"><span>Q</span> QuizRoom live</div><div className="room-code-small">Код <strong>{state.code}</strong></div><SoundToggle /><Button variant="danger" onClick={() => emit("host:finish")}>Завершить</Button></div>
       <ErrorMessage error={error} />
       {!question ? (
         <section className="lobby-card">

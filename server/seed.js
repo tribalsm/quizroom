@@ -2,8 +2,8 @@ import "dotenv/config";
 import { db } from "./db.js";
 import { hashPassword } from "./auth.js";
 
-const organizerEmail = "organizer@quizora.local";
-const playerEmail = "player@quizora.local";
+const organizerEmail = "organizer@quizroom.local";
+const playerEmail = "player@quizroom.local";
 const passwordHash = await hashPassword("quiz123");
 
 const insertUser = db.prepare("INSERT OR IGNORE INTO users (name, email, password_hash, role) VALUES (?, ?, ?, ?)");
@@ -38,5 +38,5 @@ for (const [text, explanation] of explanations) {
 }
 
 console.log("Демо-данные созданы:");
-console.log("Организатор: organizer@quizora.local / quiz123");
-console.log("Участник: player@quizora.local / quiz123");
+console.log("Организатор: organizer@quizroom.local / quiz123");
+console.log("Участник: player@quizroom.local / quiz123");

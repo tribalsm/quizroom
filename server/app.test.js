@@ -9,18 +9,18 @@ const app = createApp();
 beforeAll(async () => {
   const hash = await hashPassword("quiz123");
   db.prepare("INSERT OR IGNORE INTO users (name, email, password_hash, role) VALUES (?, ?, ?, ?)")
-    .run("Тестовый организатор", "test-organizer@quizora.local", hash, "ORGANIZER");
+    .run("Тестовый организатор", "test-organizer@quizroom.local", hash, "ORGANIZER");
   db.prepare("INSERT OR IGNORE INTO users (name, email, password_hash, role) VALUES (?, ?, ?, ?)")
-    .run("Тестовый участник", "test-player@quizora.local", hash, "PARTICIPANT");
+    .run("Тестовый участник", "test-player@quizroom.local", hash, "PARTICIPANT");
 });
 
 afterAll(() => {
-  const organizer = db.prepare("SELECT id FROM users WHERE email = ?").get("test-organizer@quizora.local");
+  const organizer = db.prepare("SELECT id FROM users WHERE email = ?").get("test-organizer@quizroom.local");
   if (organizer) {
     db.prepare("DELETE FROM quizzes WHERE organizer_id = ? AND (title LIKE 'Тестовый квиз %' OR title LIKE 'Гостевой тест %')")
       .run(organizer.id);
   }
-  db.prepare("DELETE FROM users WHERE email LIKE '%@guest.quizora.local' AND id NOT IN (SELECT user_id FROM session_players)").run();
+  db.prepare("DELETE FROM users WHERE email LIKE '%@guest.quizroom.local' AND id NOT IN (SELECT user_id FROM session_players)").run();
 });
 
 async function login(email) {
@@ -28,7 +28,7 @@ async function login(email) {
   return response.body.token;
 }
 
-describe("Quizora API", () => {
+describe("QuizRoom API", () => {
   it("отвечает на health-check", async () => {
     const response = await request(app).get("/api/health");
     expect(response.status).toBe(200);
@@ -36,14 +36,14 @@ describe("Quizora API", () => {
   });
 
   it("авторизует пользователя", async () => {
-    const response = await request(app).post("/api/auth/login").send({ email: "test-organizer@quizora.local", password: "quiz123" });
+    const response = await request(app).post("/api/auth/login").send({ email: "test-organizer@quizroom.local", password: "quiz123" });
     expect(response.status).toBe(200);
     expect(response.body.user.role).toBe("ORGANIZER");
     expect(response.body.token).toBeTruthy();
   });
 
   it("создаёт квиз и вопрос", async () => {
-    const token = await login("test-organizer@quizora.local");
+    const token = await login("test-organizer@quizroom.local");
     const quizResponse = await request(app).post("/api/quizzes").set("Authorization", `Bearer ${token}`).send({
       title: `Тестовый квиз ${Date.now()}`,
       category: "Тест",
@@ -61,7 +61,7 @@ describe("Quizora API", () => {
   });
 
   it("создаёт гостевого участника для активной комнаты", async () => {
-    const organizer = db.prepare("SELECT id FROM users WHERE email = ?").get("test-organizer@quizora.local");
+    const organizer = db.prepare("SELECT id FROM users WHERE email = ?").get("test-organizer@quizroom.local");
     const quiz = db.prepare("INSERT INTO quizzes (organizer_id, title) VALUES (?, ?)")
       .run(organizer.id, `Гостевой тест ${Date.now()}`);
     const roomCode = String(Date.now()).slice(-6);
@@ -74,7 +74,7 @@ describe("Quizora API", () => {
   });
 
   it("не разрешает участнику управлять квизами", async () => {
-    const token = await login("test-player@quizora.local");
+    const token = await login("test-player@quizroom.local");
     const response = await request(app).get("/api/quizzes").set("Authorization", `Bearer ${token}`);
     expect(response.status).toBe(403);
   });

@@ -16,5 +16,5 @@ io.use(socketAuth);
 attachRealtime(io);
 
 server.listen(port, () => {
-  console.log(`Quizora server: http://localhost:${port}`);
+  console.log(`QuizRoom server: http://localhost:${port}`);
 });
