@@ -8,10 +8,10 @@
   <!-- Rounded Q -->
   <rect x="12" y="12" width="41" height="41" rx="10" fill="#C7F36B"/>
   <rect x="21" y="21" width="23" height="23" rx="2.5" fill="#172033"/>
-  <path d="M34.5 44H46l7 6.2V62L34.5 47.8V44Z" fill="#C7F36B"/>
+  <path d="M34.5 44h11L52 49.8v8L34.5 47.8V44Z" fill="#C7F36B"/>
 
   <!-- Open door cut into the Q tail -->
-  <path d="M45 47.2 51.8 42l10.2 6.1V62h-4.5V51l-5.7-3.3-2.4 1.8V62H45V47.2Z" fill="#172033"/>
-  <path d="M50.2 49.1 56.5 52v10h-6.3V49.1Z" fill="#F7F6F2"/>
-  <path d="M57.5 51.2 62 48.1V62h-4.5V51.2Z" fill="#C7F36B"/>
+  <path d="M44 47.2 51 42l8.5 5V62H44V47.2Z" fill="#172033"/>
+  <path d="M49.5 50 53.5 48v14h-4V50Z" fill="#F7F6F2"/>
+  <path d="M54.5 49 58.5 51.3V62h-4V49Z" fill="#C7F36B"/>
 </svg>
