@@ -2,16 +2,19 @@
   <title id="title">QuizRoom</title>
   <desc id="desc">The QuizRoom Q-room logo with an open door</desc>
 
+  <!-- White presentation surface -->
+  <rect width="64" height="64" rx="16" fill="#FFFFFF"/>
+
   <!-- Room -->
   <rect x="2" y="2" width="60" height="60" rx="14" fill="#172033"/>
 
-  <!-- Rounded Q -->
-  <rect x="12" y="12" width="41" height="41" rx="10" fill="#C7F36B"/>
-  <rect x="21" y="21" width="23" height="23" rx="2.5" fill="#172033"/>
-  <path d="M34.5 44h11L52 49.8v8L34.5 47.8V44Z" fill="#C7F36B"/>
+  <!-- A single, evenly rounded Q contour -->
+  <rect x="12" y="12" width="40" height="40" rx="12" fill="#C7F36B"/>
 
-  <!-- Open door cut into the Q tail -->
-  <path d="M44 47.2 51 42l8.5 5V62H44V47.2Z" fill="#172033"/>
-  <path d="M47.5 47.4 59.2 51.7v9.8l-11.7 .5V47.4Z" fill="#C7F36B" stroke="#172033" stroke-width="1.5" stroke-linejoin="round"/>
-  <circle cx="56.4" cy="56.5" r="1.2" fill="#172033"/>
+  <!-- The Q tail flows directly into the open door -->
+  <path d="M36.5 42.5 50 54.5" fill="none" stroke="#C7F36B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="20" y="20" width="24" height="24" rx="4" fill="#172033"/>
+  <rect x="47.5" y="49.8" width="4.5" height="11.45" rx="1" fill="#172033"/>
+  <path d="M51.5 50.2 57.5 52v9.25h-6Z" fill="#C7F36B" stroke="#172033" stroke-width="1.5" stroke-linejoin="round"/>
+  <circle cx="55.4" cy="55.7" r=".9" fill="#172033"/>
 </svg>
